@@ -229,7 +229,7 @@
       load.textContent = "↗";
       load.addEventListener("click", () => {
         urlInput.value = item.originalUrl || item.url;
-        sourceSelect.value = ["google","facebook","instagram","tiktok","newsletter","influencer"].includes(item.source) ? item.source : "custom";
+        sourceSelect.value = ["google","facebook","instagram","tiktok","reddit","X","newsletter","influencer"].includes(item.source) ? item.source : "custom";
         customSource.value = sourceSelect.value === "custom" ? (item.source || "") : "";
         customSource.hidden = sourceSelect.value !== "custom";
         mediumSelect.value = ["cpc","paid-social","display","email","affiliate","organic-social"].includes(item.medium) ? item.medium : "custom";
@@ -295,7 +295,7 @@
   sourceSelect.addEventListener("change", () => {
     customSource.hidden = sourceSelect.value !== "custom";
     if (sourceSelect.value === "google") mediumSelect.value = "cpc";
-    else if (["facebook", "instagram", "tiktok"].includes(sourceSelect.value)) mediumSelect.value = "paid-social";
+    else if (["facebook", "instagram", "tiktok", "reddit", "X"].includes(sourceSelect.value)) mediumSelect.value = "paid-social";
     else if (sourceSelect.value === "newsletter") mediumSelect.value = "email";
     if (mediumSelect.value !== "custom") customMedium.hidden = true;
   });
