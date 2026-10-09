@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151515">
+  <meta name="description" content="Create and copy campaign UTM links for MS Kundan Creation product pages.">
+  <title>UTM Builder | MS Kundan Creation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="./" aria-label="MS Kundan Creation UTM Builder home">
+        <span class="brand-mark" aria-hidden="true">MK</span>
+        <span class="brand-copy"><strong>MS Kundan</strong><small>CREATION · MARKETING TOOLS</small></span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <a class="nav-item active" href="#builder"><span aria-hidden="true">↗</span> UTM Builder</a>
+      <a class="nav-item" href="#history"><span aria-hidden="true">◷</span> Link History</a>
+      <div class="sidebar-note">
+        <span class="note-icon" aria-hidden="true">✦</span>
+        <strong>Campaign-ready links</strong>
+        <p>Build consistent tracking URLs for your product campaigns.</p>
+      </div>
+      <div class="sidebar-footer"><span class="status-dot"></span> Runs in your browser</div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MARKETING WORKSPACE</p>
+          <h1>UTM Link Builder</h1>
+          <p class="subtitle">Create trackable campaign URLs for any product page.</p>
+        </div>
+        <div class="topbar-pill"><span class="status-dot"></span> Ready to build</div>
+      </header>
+
+      <section class="stats-grid" aria-label="Workspace summary">
+        <article class="stat-card">
+          <div class="stat-icon purple" aria-hidden="true">↗</div>
+          <div><p>Links created this session</p><strong id="session-count">0</strong></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon amber" aria-hidden="true">⌁</div>
+          <div><p>Saved in this browser</p><strong id="saved-count">0</strong></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon green" aria-hidden="true">✓</div>
+          <div><p>Store domain</p><strong class="domain-value">mskundancreation.com</strong></div>
+        </article>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel builder-panel" id="builder">
+          <div class="panel-heading">
+            <div><span class="step-label">STEP 01</span><h2>Campaign details</h2><p>Enter your product URL and tracking parameters.</p></div>
+            <span class="panel-symbol" aria-hidden="true">⌘</span>
+          </div>
+
+          <form id="utm-form" novalidate>
+            <div class="field-group">
+              <label for="product-url">Product URL <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <span aria-hidden="true">🔗</span>
+                <input id="product-url" name="product-url" type="url" placeholder="https://mskundancreation.com/products/product-name" autocomplete="url" required>
+              </div>
+              <p class="field-help">Paste the full product link. Existing query parameters, such as variant IDs, will be preserved.</p>
+              <p class="field-error" id="url-error" role="alert" hidden>Enter a valid http:// or https:// URL.</p>
+            </div>
+
+            <div class="field-row">
+              <div class="field-group">
+                <label for="utm-source">Campaign source <span class="required">*</span></label>
+                <select id="utm-source" name="utm-source">
+                  <option value="google">Google</option>
+                  <option value="facebook">Facebook</option>
+                  <option value="instagram">Instagram</option>
+                  <option value="tiktok">TikTok</option>
+                  <option value="newsletter">Newsletter</option>
+                  <option value="influencer">Influencer</option>
+                  <option value="custom">Custom source…</option>
+                </select>
+                <input id="custom-source" class="custom-field" type="text" placeholder="Enter custom source" hidden>
+              </div>
+              <div class="field-group">
+                <label for="utm-medium">Campaign medium <span class="required">*</span></label>
+                <select id="utm-medium" name="utm-medium">
+                  <option value="cpc">CPC / Paid search</option>
+                  <option value="paid-social">Paid social</option>
+                  <option value="display">Display</option>
+                  <option value="email">Email</option>
+                  <option value="affiliate">Affiliate</option>
+                  <option value="organic-social">Organic social</option>
+                  <option value="custom">Custom medium…</option>
+                </select>
+                <input id="custom-medium" class="custom-field" type="text" placeholder="Enter custom medium" hidden>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="utm-campaign">Campaign name <span class="required">*</span></label>
+              <input id="utm-campaign" type="text" placeholder="e.g. festive_sale_2026" required>
+              <p class="field-help">Use a consistent name across ads that belong to the same campaign.</p>
+            </div>
+
+            <div class="field-row">
+              <div class="field-group">
+                <label for="utm-content">Ad content <span class="optional">OPTIONAL</span></label>
+                <input id="utm-content" type="text" placeholder="e.g. lingam_video_1">
+              </div>
+              <div class="field-group">
+                <label for="utm-term">Keyword / term <span class="optional">OPTIONAL</span></label>
+                <input id="utm-term" type="text" placeholder="e.g. golden_lingam">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="button button-primary" type="submit"><span aria-hidden="true">✦</span> Generate UTM link</button>
+              <button class="button button-secondary" id="reset-button" type="button">Reset form</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel result-panel" aria-live="polite">
+          <div class="panel-heading">
+            <div><span class="step-label">STEP 02</span><h2>Your tracking link</h2><p>Your generated URL will appear here.</p></div>
+            <span class="panel-symbol" aria-hidden="true">⌁</span>
+          </div>
+          <div id="empty-result" class="empty-result">
+            <div class="empty-illustration" aria-hidden="true"><span>↗</span><i></i><b></b></div>
+            <h3>Ready when you are</h3>
+            <p>Fill in the campaign details, then generate your UTM link.</p>
+          </div>
+          <div id="generated-result" hidden>
+            <div class="result-success"><span aria-hidden="true">✓</span> UTM link generated</div>
+            <label class="result-label" for="generated-url">FINAL URL</label>
+            <textarea id="generated-url" rows="6" readonly spellcheck="false"></textarea>
+            <div class="result-actions">
+              <button class="button button-primary" id="copy-button" type="button"><span aria-hidden="true">▢</span> Copy link</button>
+              <button class="button button-secondary" id="open-button" type="button">Open URL ↗</button>
+            </div>
+            <p class="copy-feedback" id="copy-feedback" role="status"></p>
+            <div class="parameter-summary">
+              <h3>Included parameters</h3>
+              <div id="parameter-chips" class="parameter-chips"></div>
+            </div>
+            <button id="save-button" class="button button-save" type="button">＋ Save to link history</button>
+          </div>
+          <div class="privacy-note"><span aria-hidden="true">🔒</span><span>Links are generated locally in your browser. No store login or API key is needed.</span></div>
+        </section>
+      </div>
+
+      <section class="panel history-panel" id="history">
+        <div class="history-heading">
+          <div><span class="step-label">YOUR WORKSPACE</span><h2>Link history</h2><p>Saved links stay in this browser on this device.</p></div>
+          <div class="history-actions">
+            <button class="button button-secondary button-small" id="export-button" type="button">↓ Export CSV</button>
+            <button class="button button-quiet button-small" id="clear-history-button" type="button">Clear history</button>
+          </div>
+        </div>
+        <div class="history-toolbar">
+          <div class="search-box"><span aria-hidden="true">⌕</span><input id="history-search" type="search" placeholder="Search product URL or campaign…" aria-label="Search link history"></div>
+          <span id="history-total" class="history-total">0 saved links</span>
+        </div>
+        <div id="history-list" class="history-list">
+          <div class="history-empty"><span aria-hidden="true">◷</span><strong>No saved links yet</strong><p>Generate a link and save it to see it here.</p></div>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <span>MS KUNDAN CREATION · UTM BUILDER</span>
+        <span>Built for consistent campaign tracking</span>
+      </footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
